@@ -45,7 +45,9 @@ const displayNews = (newses) => {
                 <span>${news.total_view}M</span>
               </div>
               <div>
-                <i class="fa-solid fa-arrow-right"></i>
+                <i onclick="newsModalLoader('${
+                  news._id
+                }')" class="fa-solid fa-arrow-right fs-4" data-bs-toggle="modal" data-bs-target="#newsModal"></i>
               </div>
             </div>
           </div>
@@ -56,6 +58,36 @@ const displayNews = (newses) => {
     defaultNews.appendChild(newsDiv);
   });
 };
+// Modal loader
+const newsModalLoader = (newsId) => {
+  const url = `https://openapi.programming-hero.com/api/news/${newsId}`;
+  fetch(url)
+    .then((res) => res.json())
+    .then((data) => newModalDisplay(data.data));
+};
+// Modal display
+const newModalDisplay = (newsDetails) => {
+  const modalContainer = document.getElementById("modal-container");
+  modalContainer.innerHTML = "";
+  newsDetails.forEach((newsDetail) => {
+    const modalDiv = document.createElement("div");
+    modalDiv.classList.add("modal-content");
+    modalDiv.innerHTML = `
+    <div class="modal-header">
+      <h1 class="modal-title fs-5" id="newsModalLabel">${newsDetail.title}</h1>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+      ${newsDetail.details}
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+    </div>
+  `;
+    modalContainer.appendChild(modalDiv);
+  });
+};
+
 // Load news category
 const loadNewsCatagory = () => {
   const url = "https://openapi.programming-hero.com/api/news/categories";
@@ -69,7 +101,6 @@ const desplayNewsCategory = (categories) => {
     "news-category-container"
   );
   categories.forEach((category) => {
-    console.log(category);
     const categoryLi = document.createElement("li");
     categoryLi.classList.add("nav-item");
     categoryLi.innerHTML = `
@@ -78,16 +109,13 @@ const desplayNewsCategory = (categories) => {
     newsCategoryContainer.appendChild(categoryLi);
   });
 };
-// Display news ditais category 
-const loadDefaultNews = (id) => {
-  console.log(id);
-  const url = `https://openapi.programming-hero.com/api/news/category/${id}`;
-  console.log(url);
+// Display news ditais category
+const loadDefaultNews = (categoryId) => {
+  const url = `https://openapi.programming-hero.com/api/news/category/${categoryId}`;
   fetch(url)
     .then((res) => res.json())
     .then((data) => displayNews(data.data));
 };
-
 
 loadDefaultNews();
 loadNewsCatagory();

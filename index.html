@@ -28,7 +28,13 @@
           Time
         </h4>
         <div class="navbar nav-underline fs-5">
-          <a onclick="loadNews()" class="me-3 nav-link" aria-current="page" href="#">News</a>
+          <a
+            onclick="loadNews()"
+            class="me-3 nav-link"
+            aria-current="page"
+            href="#"
+            >News</a
+          >
           <a class="nav-link" href="#">Blog</a>
           <img src="images/profile.png" class="ms-3" alt="" />
         </div>
@@ -36,8 +42,10 @@
       <hr class="" />
       <!-- New category section  -->
       <section>
-        <ul id="news-category-container" class="nav nav-fill navbar-text nav-underline">            
-        </ul>
+        <ul
+          id="news-category-container"
+          class="nav nav-fill navbar-text nav-underline"
+        ></ul>
       </section>
     </header>
     <main>
@@ -45,7 +53,22 @@
       <section class="container mt-3">
         <div id="default-news" class="row row-cols-1 g-1"></div>
       </section>
+      <!-- Modal section -->
+      <section>
+        <div
+          class="modal fade"
+          id="newsModal"
+          tabindex="-1"
+          aria-labelledby="newsModalLabel"
+          aria-hidden="true"
+        >
+          <div id="modal-container" class="modal-dialog"></div>
+        </div>
+      </section>
     </main>
+    <footer class="text-center">
+      <p>Copyright 2023</p>
+    </footer>
 
     <!-- JavaScript links -->
     <script src="js/app.js"></script>
