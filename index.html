@@ -20,22 +20,25 @@
   <body>
     <header class="container">
       <!-- Navigation section -->
-      <nav class="d-flex justify-content-between align-content-center mt-3">
+      <nav class="d-flex justify-content-between align-items-center mt-3">
         <h4 class="text-primary">
           <span class="py-1 px-2 text-bg-primary text-white rounded-1"
             >News</span
           >
           Time
         </h4>
-        <div class="fs-5">
-          <ul class="d-inline">
-            <il class="pe-2">News</il>
-            <il>Blogs</il>
-          </ul>
+        <div class="navbar nav-underline fs-5">
+          <a onclick="loadNews()" class="me-3 nav-link" aria-current="page" href="#">News</a>
+          <a class="nav-link" href="#">Blog</a>
           <img src="images/profile.png" class="ms-3" alt="" />
         </div>
       </nav>
       <hr class="" />
+      <!-- New category section  -->
+      <section>
+        <ul id="news-category-container" class="nav nav-fill navbar-text nav-underline">
+        </ul>
+      </section>
     </header>
     <main>
       <!-- Display news section -->

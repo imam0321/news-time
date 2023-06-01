@@ -8,8 +8,9 @@ const loadNews = () => {
 // Display news
 const displayNews = (newses) => {
   const defaultNews = document.getElementById("default-news");
+  defaultNews.innerHTML = "";
   newses.forEach((news) => {
-    console.log(news);
+    // console.log(news);
     const newsDiv = document.createElement("div");
     newsDiv.classList.add("col");
     newsDiv.innerHTML = `
@@ -25,7 +26,7 @@ const displayNews = (newses) => {
         <div class="col-md-9 my-auto">
           <div class="card-body">
             <h5 class="card-title">${news.title}</h5>
-            <p class="card-text mb-5">${news.details.slice(0, 100)}</p>
+            <p class="card-text mt-3 mb-5">${news.details.slice(0, 300)}...</p>
             <div class="d-flex justify-content-between align-items-center">
               <div class="d-flex align-items-center">
                 <img
@@ -40,8 +41,8 @@ const displayNews = (newses) => {
                 </div>
               </div>
               <div>
-                <i class="fa-regular fa-eye">${news.total_view}</i>
-                <span>im</span>
+                <i class="fa-regular fa-eye"></i>
+                <span>${news.total_view}M</span>
               </div>
               <div>
                 <i class="fa-solid fa-arrow-right"></i>
@@ -55,5 +56,25 @@ const displayNews = (newses) => {
     defaultNews.appendChild(newsDiv);
   });
 };
-
-loadNews();
+// Load news category 
+const loadNewsCatagory = () => {
+  const url = "https://openapi.programming-hero.com/api/news/categories";
+  fetch(url)
+    .then((res) => res.json())
+    .then((data) => desplayNewsCategory(data.data.news_category));
+};
+// Display News Category 
+const desplayNewsCategory = (categories) => {
+  const newsCategoryContainer = document.getElementById('news-category-container');
+  categories.forEach(category =>{
+    console.log(category);
+    const categoryLi = document.createElement('li');
+    categoryLi.classList.add('nav-item');
+    categoryLi.innerHTML = `
+       <a class="nav-link" aria-current="page" href="#">${category.category_name}</a>
+    `;
+    newsCategoryContainer.appendChild(categoryLi);
+  })
+};
+loadNewsCatagory();
+// loadNews();
