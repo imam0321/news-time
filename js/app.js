@@ -9,6 +9,13 @@ const loadNews = () => {
 const displayNews = (newses) => {
   const defaultNews = document.getElementById("default-news");
   defaultNews.innerHTML = "";
+
+  // Total News
+  const totalNews = document.getElementById("total-news");
+  totalNews.innerHTML = `
+  <h4 class="px-3 py-4">${newses.length} items found for category</h4>
+  `;
+
   newses.forEach((news) => {
     // console.log(news);
     const newsDiv = document.createElement("div");
@@ -96,7 +103,7 @@ const loadNewsCatagory = () => {
     .then((data) => desplayNewsCategory(data.data.news_category));
 };
 // Display News Category
-const desplayNewsCategory = (categories) => {
+const desplayNewsCategory = (categories, category) => {
   const newsCategoryContainer = document.getElementById(
     "news-category-container"
   );
