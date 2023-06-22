@@ -13,7 +13,24 @@ const displayNews = (newses) => {
   // Total News
   const totalNews = document.getElementById("total-news");
   totalNews.innerHTML = `
-  <h4 class="px-3 py-4">${newses.length} items found for category</h4>
+  <h4 class="px-5 py-4">${newses.length} items found for category</h4>
+  <div class="d-flex justify-content-between align-items-center my-4">
+    <div class="d-flex align-items-center">
+    <h5 class="d-inline pe-2">Sort By View:</h5>
+      <div class="d-inline">
+        <select class="form-select" aria-label="Default select example">
+          <option selected>Default</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </div>
+    </div>
+    <div class="">
+      <button type="button" class="btn btn-outline-primary">Today’s Pick</button>
+      <button type="button" class="btn btn-outline-primary">Trending</button>
+    </div>
+  </div>
   `;
 
   newses.forEach((news) => {
@@ -52,6 +69,13 @@ const displayNews = (newses) => {
                 <span>${news.total_view}M</span>
               </div>
               <div>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-regular fa-star"></i>
+                <i class="fa-regular fa-star"></i>
+                <i class="fa-regular fa-star"></i>
+                <i class="fa-regular fa-star"></i>
+              </div>
+              <div>
                 <i onclick="newsModalLoader('${
                   news._id
                 }')" class="fa-solid fa-arrow-right fs-4" data-bs-toggle="modal" data-bs-target="#newsModal"></i>
@@ -64,6 +88,7 @@ const displayNews = (newses) => {
     `;
     defaultNews.appendChild(newsDiv);
   });
+  toggleLodear(false);
 };
 // Modal loader
 const newsModalLoader = (newsId) => {
@@ -103,7 +128,7 @@ const loadNewsCatagory = () => {
     .then((data) => desplayNewsCategory(data.data.news_category));
 };
 // Display News Category
-const desplayNewsCategory = (categories, category) => {
+const desplayNewsCategory = (categories) => {
   const newsCategoryContainer = document.getElementById(
     "news-category-container"
   );
@@ -115,6 +140,7 @@ const desplayNewsCategory = (categories, category) => {
     `;
     newsCategoryContainer.appendChild(categoryLi);
   });
+  toggleLodear(true);
 };
 // Display news ditais category
 const loadDefaultNews = (categoryId) => {
@@ -122,6 +148,16 @@ const loadDefaultNews = (categoryId) => {
   fetch(url)
     .then((res) => res.json())
     .then((data) => displayNews(data.data));
+};
+
+// Spinner Lodear 
+const toggleLodear = (isLoding) => {
+  const lodearSection = document.getElementById("lodear");
+  if (isLoding) {
+    lodearSection.classList.remove("d-none");
+  } else {
+    lodearSection.classList.add("d-none");
+  }
 };
 
 loadDefaultNews();
