@@ -12,21 +12,20 @@ const displayNews = (newses) => {
 
   // Total News
   const totalNews = document.getElementById("total-news");
+  totalNews.innerHTML = "";
   totalNews.innerHTML = `
   <h4 class="px-5 py-4">${newses.length} items found for category</h4>
-  <div class="d-flex justify-content-between align-items-center my-4">
-    <div class="d-flex align-items-center">
+  <div class="d-flex flex-md-row flex-column justify-content-between align-items-center my-4">
+    <div class="d-flex align-items-center mb-md-0 mb-2">
     <h5 class="d-inline pe-2">Sort By View:</h5>
       <div class="d-inline">
         <select class="form-select" aria-label="Default select example">
           <option selected>Default</option>
           <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
         </select>
       </div>
     </div>
-    <div class="">
+    <div>
       <button type="button" class="btn btn-outline-primary">Today’s Pick</button>
       <button type="button" class="btn btn-outline-primary">Trending</button>
     </div>
@@ -44,7 +43,7 @@ const displayNews = (newses) => {
           <img 
           src="${news.image_url}" 
           class="img-fluid rounded-3"
-          style="height: 250px; width: 300px;" 
+          style="height: 250px;" 
           alt="...">
         </div>
         <div class="col-md-9 my-auto">
@@ -88,7 +87,7 @@ const displayNews = (newses) => {
     `;
     defaultNews.appendChild(newsDiv);
   });
-  toggleLodear(false);
+  toggleLoader(false);
 };
 // Modal loader
 const newsModalLoader = (newsId) => {
@@ -140,7 +139,7 @@ const desplayNewsCategory = (categories) => {
     `;
     newsCategoryContainer.appendChild(categoryLi);
   });
-  toggleLodear(true);
+  toggleLoader(true);
 };
 // Display news ditais category
 const loadDefaultNews = (categoryId) => {
@@ -150,13 +149,13 @@ const loadDefaultNews = (categoryId) => {
     .then((data) => displayNews(data.data));
 };
 
-// Spinner Lodear 
-const toggleLodear = (isLoding) => {
-  const lodearSection = document.getElementById("lodear");
-  if (isLoding) {
-    lodearSection.classList.remove("d-none");
+// Spinner Loader
+const toggleLoader = (isLoading) => {
+  const loaderSection = document.getElementById("loader");
+  if (isLoading) {
+    loaderSection.classList.remove("d-none");
   } else {
-    lodearSection.classList.add("d-none");
+    loaderSection.classList.add("d-none");
   }
 };
 
