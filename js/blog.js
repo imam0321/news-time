@@ -26,9 +26,8 @@ const blogs = [
       "Template literals provide an easy way to interpolate variables and expressions into strings. The method is called string interpolation.",
   },
 ];
-
+toggleLoader(true);
 const displayBlogData = (blogs) => {
-  toggleLoader(true);
   const blogsSection = document.getElementById("blogs");
   blogsSection.innerHTML = "";
   blogs.forEach((blog) => {
@@ -43,6 +42,7 @@ const displayBlogData = (blogs) => {
     </div>
   `;
     blogsSection.appendChild(blogsDiv);
+    toggleLoader(false);
   });
-  toggleLoader(false);
+  displayNews().innerHTML = "";
 };

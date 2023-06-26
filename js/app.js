@@ -93,8 +93,9 @@ const displayNews = (newses) => {
     </div>  
     `;
     defaultNews.appendChild(newsDiv);
+    toggleLoader(false);
   });
-  toggleLoader(false);
+  displayBlogData().innerHTML = "";
 };
 // Modal loader
 const newsModalLoader = (newsId) => {
@@ -144,6 +145,7 @@ const desplayNewsCategory = (categories) => {
     categoryLi.innerHTML = `
        <a onclick="loadDefaultNews('${category.category_id}')" class="nav-link" aria-current="page" href="#">${category.category_name}</a>
     `;
+    
     newsCategoryContainer.appendChild(categoryLi);
   });
   toggleLoader(true);
